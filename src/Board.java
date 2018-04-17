@@ -88,7 +88,7 @@ public class Board extends JPanel implements ActionListener {
         super();
 
         matrix = new Tetrominoes[NUM_ROWS][NUM_COLS];
-
+        myKeyAdepter = new MyKeyAdapter();
         initValues();
         timer = new Timer(deltaTime, this);
     }
@@ -104,7 +104,7 @@ public class Board extends JPanel implements ActionListener {
         currentRow = INIT_ROW;
         currentCol = NUM_COLS / 2;
 
-        myKeyAdepter = new MyKeyAdapter();
+        
 
     }
 
@@ -113,9 +113,17 @@ public class Board extends JPanel implements ActionListener {
         timer.start();
         scoreBoard.reset();
         currentShape = new Shape(); // = Shape.getRandomShape()
-
+        removeKeyListener(myKeyAdepter);
         addKeyListener(myKeyAdepter);
 
+    }
+    
+    public boolean incrementLevels(){
+        if(scoreBoard.getScore()==5 ||scoreBoard.getScore()==10 || scoreBoard.getScore()==15 ){
+            
+            return true;
+        }
+        return false;        
     }
 
     public void setScoreBoard(ScoreBoard scoreBoard) {
@@ -167,12 +175,15 @@ public class Board extends JPanel implements ActionListener {
             if (isGameOver()) {
                 gameOver();
             } else {
+               
                 moveCurrentShapeToMatrix();
                 checkRow();
                 currentShape = new Shape();
                 currentRow = INIT_ROW;
                 currentCol = NUM_COLS / 2;
                 checkRow();
+                 
+                
             }
 
         }
@@ -212,8 +223,14 @@ public class Board extends JPanel implements ActionListener {
             }
             if (lineNoWhite) {
                 cleanRow(i);
+                scoreBoard.increment(1);
+                if(incrementLevels()){
+                    deltaTime=deltaTime-75;
+                    timer.setDelay(deltaTime);
+                }
             }
         }
+        
     }
 
     private void cleanRow(int numRow) {
@@ -222,7 +239,7 @@ public class Board extends JPanel implements ActionListener {
                 matrix[i][j] = matrix[i - 1][j];
             }
         }
-        scoreBoard.increment(1);
+        
     }
 
     private void moveCurrentShapeToMatrix() {
