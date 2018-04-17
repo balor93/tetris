@@ -56,10 +56,10 @@ public class Board extends JPanel implements ActionListener {
                     }
                     break;
                 default:
-                   
+
                     break;
             }
-           
+
             repaint();
         }
 
@@ -111,7 +111,7 @@ public class Board extends JPanel implements ActionListener {
     public void initGame() {
         initValues();
         timer.start();
-
+        scoreBoard.reset();
         currentShape = new Shape(); // = Shape.getRandomShape()
 
         addKeyListener(myKeyAdepter);
@@ -123,12 +123,13 @@ public class Board extends JPanel implements ActionListener {
     }
 
     private void cleanBoard() {
+
         for (int row = 0; row < NUM_ROWS; row++) {
             for (int col = 0; col < NUM_COLS; col++) {
-
                 matrix[row][col] = Tetrominoes.NoShape;
             }
         }
+
     }
 
     private boolean canMoveTo(Shape shape, int newRow, int newCol) {
@@ -155,8 +156,6 @@ public class Board extends JPanel implements ActionListener {
         }
         return false;
     }
-
-   
 
     //Main Game loop
     @Override
@@ -186,19 +185,18 @@ public class Board extends JPanel implements ActionListener {
             int row = currentRow + squaresArray[point][1];
             if (row <= 0) {
                 return true;
-                
+
             }
         }
         return false;
     }
 
     public void gameOver() {
-        scoreBoard.setText("game over"); 
+        scoreBoard.setText("game over");
         removeKeyListener(myKeyAdepter);
         timer.stop();
-        WindowEnd d = new WindowEnd((JFrame) getParent().getParent().getParent().getParent(), true);
+        WindowEnd d = new WindowEnd((JFrame) getParent().getParent().getParent().getParent(), true, scoreBoard);
         d.setVisible(true);
-        
 
     }
 

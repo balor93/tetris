@@ -32,7 +32,7 @@ public class Tetris extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItemInitGame = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
+        jMenuItemExit = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -62,10 +62,15 @@ public class Tetris extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuItemInitGame);
 
-        jMenuBar1.add(jMenu1);
+        jMenuItemExit.setText("Exit");
+        jMenuItemExit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemExitActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItemExit);
 
-        jMenu2.setText("Edit");
-        jMenuBar1.add(jMenu2);
+        jMenuBar1.add(jMenu1);
 
         setJMenuBar(jMenuBar1);
 
@@ -75,6 +80,10 @@ public class Tetris extends javax.swing.JFrame {
     private void jMenuItemInitGameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemInitGameActionPerformed
         board.initGame();
     }//GEN-LAST:event_jMenuItemInitGameActionPerformed
+
+    private void jMenuItemExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemExitActionPerformed
+      dispose();
+    }//GEN-LAST:event_jMenuItemExitActionPerformed
 
     /**
      * @param args the command line arguments
@@ -115,8 +124,8 @@ public class Tetris extends javax.swing.JFrame {
     private ScoreBoard ScoreBoard;
     private Board board;
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItemExit;
     private javax.swing.JMenuItem jMenuItemInitGame;
     // End of variables declaration//GEN-END:variables
 }

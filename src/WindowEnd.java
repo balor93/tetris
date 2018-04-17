@@ -9,15 +9,17 @@
  * @author alu20909379x
  */
 public class WindowEnd extends javax.swing.JDialog {
-
-
-   
+    
+    private ScoreBoard b;
+    
     /**
      * Creates new form End
      */
-    public WindowEnd(java.awt.Frame parent, boolean modal) {
+    public WindowEnd(java.awt.Frame parent, boolean modal, ScoreBoard sb) {
         super(parent, modal);
         initComponents();
+        b=sb;
+        scoreLabel.setText(b.endScore());
     }
 
     /**
@@ -31,7 +33,7 @@ public class WindowEnd extends javax.swing.JDialog {
 
         gameOverLabel = new javax.swing.JLabel();
         btnExit = new javax.swing.JButton();
-        Score = new javax.swing.JLabel();
+        scoreLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -45,9 +47,14 @@ public class WindowEnd extends javax.swing.JDialog {
             }
         });
 
-        Score.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
-        Score.setText("Score:");
-        Score.setToolTipText("");
+        scoreLabel.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        scoreLabel.setText("Score:");
+        scoreLabel.setToolTipText("");
+        scoreLabel.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                scoreLabelPropertyChange(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -64,7 +71,7 @@ public class WindowEnd extends javax.swing.JDialog {
                         .addGap(142, 142, 142))))
             .addGroup(layout.createSequentialGroup()
                 .addGap(103, 103, 103)
-                .addComponent(Score, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(scoreLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -73,7 +80,7 @@ public class WindowEnd extends javax.swing.JDialog {
                 .addGap(56, 56, 56)
                 .addComponent(gameOverLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(Score, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(scoreLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
                 .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(42, 42, 42))
@@ -86,29 +93,18 @@ public class WindowEnd extends javax.swing.JDialog {
         dispose();
     }//GEN-LAST:event_btnExitActionPerformed
 
+    private void scoreLabelPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_scoreLabelPropertyChange
+        // TODO add your handling code here:
+    }//GEN-LAST:event_scoreLabelPropertyChange
+
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {        
-        
-        /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                WindowEnd dialog = new WindowEnd(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
-        });
-    }
+   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel Score;
     private javax.swing.JButton btnExit;
     private javax.swing.JLabel gameOverLabel;
+    private javax.swing.JLabel scoreLabel;
     // End of variables declaration//GEN-END:variables
 }
