@@ -1,4 +1,5 @@
 
+import java.applet.AudioClip;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -50,9 +51,11 @@ public class Board extends JPanel implements ActionListener {
                     if (!timer.isRunning()) {
                         scoreBoard.printScore();
                         timer.start();
+                        
                     } else {
                         timer.stop();
                         scoreBoard.pause();
+                        
                     }
                     break;
                 default:
@@ -76,7 +79,9 @@ public class Board extends JPanel implements ActionListener {
 
     private int currentCol;
     private int currentRow;
-
+    
+   
+    
     private Timer timer;
 
     private MyKeyAdapter myKeyAdepter;
@@ -122,7 +127,7 @@ public class Board extends JPanel implements ActionListener {
     }
     
     public boolean incrementLevels(){
-        if(scoreBoard.getScore()==5 ||scoreBoard.getScore()==10 || scoreBoard.getScore()==15 ){
+        if(scoreBoard.getScore()%5==0 ){
             
             return true;
         }
@@ -294,9 +299,9 @@ public class Board extends JPanel implements ActionListener {
     private int squareHeight() {
         return getHeight() / NUM_ROWS;
     }
-
     
+    
+}
     
    
 
-}
